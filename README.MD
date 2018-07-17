@@ -7,7 +7,8 @@
     ├── network         网络发现模块[文件夹]
     ├── README.MD       本文档
     ├── run.py          自动化网络扫描
-    ├── start.py        特定模块,具体网段扫描
+    	spider			爬虫,爬取网页信息[文件夹]
+	├── start.py        特定模块,具体网段扫描
     ├── temp            文件缓存目录[文件夹]
     └── vulnTool        漏洞模块
         ├── aspFrame    Web->asp[文件夹]
