@@ -6,7 +6,7 @@ class test(Config.Config,Config.Colored):
 
     def run(self):
         s = Config.Config.PASSWORD_DIC_DIR
-        #print(s)
+        print(s)
         print(Config.Colored.red(s=s))
         print(Config.Colored.black(s))
         print(Config.Colored.blue(s))

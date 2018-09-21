@@ -1,6 +1,6 @@
-# coding:utf-8
-import paramiko
+#-*- coding: UTF-8 -*- 
 
+import paramiko
 import Config
 
 paramiko.util.logging.getLogger('paramiko.transport').addHandler(paramiko.util.logging.NullHandler())
@@ -21,6 +21,7 @@ def check(ip, port, timeout):
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     PASSWORD_DIC = Config.PASSWORD_DIC_DIR
+    print("asfasf")
     for user in user_list:
         for pass_ in PASSWORD_DIC:
             pass_ = str(pass_.replace('{user}', user))
@@ -33,3 +34,6 @@ def check(ip, port, timeout):
                 if "Unable to connect" in e or "timed out" in e: return
             finally:
                 ssh.close()
+
+if __name__ == "__main__":
+    print(check("118.89.47.92",22,2000))

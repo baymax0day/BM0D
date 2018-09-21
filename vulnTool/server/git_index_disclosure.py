@@ -1,3 +1,5 @@
+#coding:utf-8
+
 import requests
 import binascii
 import collections
@@ -163,14 +165,14 @@ def parse(filename, pretty=True):
 
 
 
-if len(sys.argv) == 1:
-    msg = """
-A `.git` folder disclosure exploit. By LiJieJie
-Usage: GitHack.py http://www.target.com/.git/
-bug-report: my[at]lijiejie.com (http://www.lijiejie.com)
-"""
-    print msg
-    sys.exit(0)
+# if len(sys.argv) == 1:
+#     msg = """
+# A `.git` folder disclosure exploit. By LiJieJie
+# Usage: GitHack.py http://www.target.com/.git/
+# bug-report: my[at]lijiejie.com (http://www.lijiejie.com)
+# """
+#     print msg
+#     sys.exit(0)
 
 
 class Scanner(object):
@@ -245,12 +247,12 @@ class Scanner(object):
             t.start()
 
 
-s = Scanner()
-s.scan()
-try:
-    while s.thread_count > 0:
-        time.sleep(0.1)
-except KeyboardInterrupt, e:
-    s.STOP_ME = True
-    time.sleep(1.0)
-    print 'User Aborted.'
+# s = Scanner()
+# s.scan()
+# try:
+#     while s.thread_count > 0:
+#         time.sleep(0.1)
+# except KeyboardInterrupt, e:
+#     s.STOP_ME = True
+#     time.sleep(1.0)
+#     print 'User Aborted.'

